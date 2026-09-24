@@ -100,7 +100,7 @@
     padding:.8rem 2.2rem; font-size:1rem;
     transition:transform .35s cubic-bezier(.34,1.56,.64,1), left .3s ease, top .3s ease;
   }
-  .intro-yes{background:linear-gradient(180deg, var(--gold-soft), var(--gold)); color:var(--wood-dark); transform-origin:center; position:relative; z-index:2;}
+  .intro-yes{background:linear-gradient(180deg, var(--gold-soft), var(--gold)); color:var(--wood-dark); transform-origin:top center; position:relative; z-index:2;}
   .intro-no{background:var(--wood-warm); border:1.5px solid #3d2415; color:var(--cream-paper); transform-origin:center; box-shadow:0 4px 10px rgba(0,0,0,.3); position:relative; z-index:3;}
   .intro-msg-box{
     position:absolute; left:6%; right:6%; bottom:6%;
@@ -533,40 +533,6 @@
   .corner-rose{position:absolute; right:4%; bottom:calc(env(safe-area-inset-bottom,0px) + 14px); width:46px; height:auto; z-index:3; opacity:0; transition:opacity 1s ease;}
   .corner-rose.show{opacity:.95;}
 
-  /* ---------- CONSTELLATION ---------- */
-  .constellation-title{font-family:'Mali',sans-serif; font-style:italic; font-size:1.5rem; color:var(--gold-soft); margin-bottom:.3rem; text-align:center; position:relative; z-index:2;}
-  .constellation-sub{font-size:.85rem; color:var(--cream-paper2); opacity:.85; margin-bottom:1rem; text-align:center; padding:0 10%; position:relative; z-index:2;}
-  .constellation-wrap{position:relative; z-index:2; width:82%; max-width:320px;}
-  .constellation-wrap svg{width:100%; height:auto; overflow:visible;}
-  .constellation-lines path{stroke:#ffd166; stroke-width:1.4; fill:none; opacity:0; transition:opacity 1.4s ease;}
-  .constellation-lines.show path{opacity:.55;}
-  .const-star{
-    transform-box:fill-box; transform-origin:center; cursor:pointer;
-    opacity:0; transition:opacity 1s cubic-bezier(.2,.8,.3,1), transform 1s cubic-bezier(.2,.8,.3,1);
-  }
-  .const-star:not(.active){transform:translateY(130px) scale(.4);}
-  .const-star.active{opacity:1;}
-  .const-star .star-glow{fill:#ffd166; opacity:.35;}
-  .const-star .star-core{fill:#fff3c4; stroke:#3d2415; stroke-width:1.2;}
-  .const-star-main .star-glow{fill:#ff9fbb; opacity:.4;}
-  .const-star-main .star-core{fill:#ffd1e0; stroke:#3d2415; stroke-width:1.4;}
-  .const-star:active{transform:scale(.9);}
-
-  .star-detail-overlay{
-    position:absolute; inset:0; z-index:20; background:rgba(15,10,7,.85);
-    display:flex; align-items:center; justify-content:center; padding:8%;
-    opacity:0; pointer-events:none; transition:opacity .3s ease;
-  }
-  .star-detail-overlay.show{opacity:1; pointer-events:auto;}
-  .star-detail-card{
-    background:var(--cream-paper); border:2.5px solid #3d2415; border-radius:20px;
-    padding:2rem 1.6rem; max-width:320px; width:100%; text-align:center;
-    box-shadow:0 24px 50px rgba(0,0,0,.5);
-  }
-  .star-detail-icon{width:44px; height:44px; margin-bottom:.6rem;}
-  .star-detail-card h3{font-family:'Mali',sans-serif; font-style:italic; font-size:1.3rem; color:var(--ink-brown); margin:0 0 .8rem 0;}
-  .star-detail-card p{font-size:.88rem; color:var(--ink-brown); line-height:1.8; margin:0 0 1.2rem 0;}
-
   .sketch{filter:url(#sketchy);}
   .sketch-sm{filter:url(#sketchySmall);}
 
@@ -813,7 +779,7 @@
         <text x="175" y="32" fill="#5c3a21" font-size="8.5" font-family="Mali">ออนเซ็น</text>
         <text x="234" y="132" fill="#5c3a21" font-size="8.5" font-family="Mali">มื้อค่ำ</text>
 
-        <g transform="translate(28,28)">
+        <g transform="translate(258,144)">
           <circle cx="0" cy="0" r="14" fill="none" stroke="#3d2415" stroke-width="1.4"/>
           <path d="M0 -10 L3.5 0 L0 10 L-3.5 0 Z" fill="#ff9fbb" stroke="#3d2415" stroke-width="1"/>
           <text x="0" y="-16" font-size="7" text-anchor="middle" fill="#3d2415">N</text>
@@ -872,7 +838,6 @@
       <p class="cute">ไม่ว่าพบเจอกับสถานการณ์ใด ก็ขอให้ผ่านไปได้ด้วยดีเสมอ</p>
       <p class="cute">ขอให้ดวงดาวทำให้คำอธิษฐานของคุณเป็นจริง</p>
       <svg class="final-star" viewBox="0 0 40 40"><path d="M20 5 L24 16 L36 16 L26 23 L30 35 L20 28 L10 35 L14 23 L4 16 L16 16Z" fill="#ffd166" stroke="#3d2415" stroke-width="2" stroke-linejoin="round"/></svg>
-      <button class="btn" id="toConstellation" style="margin-top:1.4rem;">ดูดาวของเราสิ ✨</button>
     </div>
     <svg class="corner-rose" id="cornerRose" viewBox="0 0 60 70">
       <path d="M30 68 Q28 45 30 30" stroke="#4a7c4e" stroke-width="2.4" fill="none"/>
@@ -884,62 +849,13 @@
     </svg>
   </section>
 
-  <!-- CONSTELLATION -->
-  <section class="scene" id="scene-constellation">
-    <div class="sky-bg"></div>
-    <div class="stars" id="starsConstellation"></div>
-    <div class="skip-link" id="skipConstellation">ข้าม »</div>
-    <div class="constellation-title">กลุ่มดาวราศีตุลย์ของเรา</div>
-    <div class="constellation-sub cute">แตะที่ดาวแต่ละดวง เพื่อฟังเรื่องราวของมัน</div>
-    <div class="constellation-wrap">
-      <svg viewBox="0 0 300 300" id="constellationSvg">
-        <g id="constellationLines" class="constellation-lines">
-          <path d="M90,55 L205,75 L228,165 L140,235 L68,155 L108,125 Z"/>
-        </g>
-        <g class="const-star" data-idx="0" transform="translate(90,55)">
-          <circle r="13" class="star-glow"/>
-          <circle r="5" class="star-core"/>
-        </g>
-        <g class="const-star" data-idx="1" transform="translate(205,75)">
-          <circle r="13" class="star-glow"/>
-          <circle r="5" class="star-core"/>
-        </g>
-        <g class="const-star" data-idx="2" transform="translate(228,165)">
-          <circle r="13" class="star-glow"/>
-          <circle r="5" class="star-core"/>
-        </g>
-        <g class="const-star const-star-main" data-idx="3" transform="translate(140,235)">
-          <circle r="18" class="star-glow"/>
-          <circle r="7" class="star-core"/>
-        </g>
-        <g class="const-star" data-idx="4" transform="translate(68,155)">
-          <circle r="13" class="star-glow"/>
-          <circle r="5" class="star-core"/>
-        </g>
-        <g class="const-star" data-idx="5" transform="translate(108,125)">
-          <circle r="13" class="star-glow"/>
-          <circle r="5" class="star-core"/>
-        </g>
-      </svg>
-    </div>
-
-    <div class="star-detail-overlay" id="starDetailOverlay">
-      <div class="star-detail-card">
-        <svg class="star-detail-icon" viewBox="0 0 40 40"><path d="M20 2 L25 15 L39 15 L27 24 L32 38 L20 29 L8 38 L13 24 L1 15 L15 15Z" fill="#ffd166" stroke="#3d2415" stroke-width="2" stroke-linejoin="round"/></svg>
-        <h3 id="starDetailTitle"></h3>
-        <p id="starDetailStory" class="cute"></p>
-        <button class="btn small" id="closeStarDetail">ปิด</button>
-      </div>
-    </div>
-  </section>
-
   <div class="progress-dots" id="progressDots"></div>
 </div>
 
 <script>
 (function(){
   const app = document.getElementById('app');
-  const scenes = ['scene-cover','scene-room','scene-walk','scene-game-intro','scene-game','scene-code','scene-letter','scene-ticket','scene-rsvp','scene-plan','scene-cake','scene-constellation'];
+  const scenes = ['scene-cover','scene-room','scene-walk','scene-game-intro','scene-game','scene-code','scene-letter','scene-ticket','scene-rsvp','scene-plan','scene-cake'];
   const dotsWrap = document.getElementById('progressDots');
   scenes.forEach((id,i)=>{ if(i>0){ const s=document.createElement('span'); s.dataset.i=i; dotsWrap.appendChild(s);} });
 
@@ -1068,7 +984,7 @@
         bottom: modalRect.top + randTop + btnRect.height
       };
       attempts++;
-      const hitsYes = rectsOverlap(candidate, yesRect, 45);
+      const hitsYes = rectsOverlap(candidate, yesRect, 20);
       const hitsMsg = msgRect && rectsOverlap(candidate, msgRect, 14);
       if((!hitsYes && !hitsMsg) || attempts > 25) break;
     } while(true);
@@ -1095,17 +1011,6 @@
     setTimeout(()=>{ introYes.style.pointerEvents = 'auto'; }, 500);
   }
 
-  function centerAndScaleYes(scale){
-    if(introYes.parentElement !== introModal){
-      introModal.appendChild(introYes);
-      introYes.style.position = 'absolute';
-      introYes.style.left = '50%';
-      introYes.style.top = '50%';
-      introYes.style.margin = '0';
-    }
-    introYes.style.transform = 'translate(-50%, -50%) scale(' + scale + ')';
-  }
-
   function dodgeNo(e){
     if(e) e.preventDefault();
     const now = Date.now();
@@ -1130,7 +1035,7 @@
       return;
     }
     const yesScale = Math.min(1 + Math.pow(noCount, 1.6) * 0.25, 7);
-    centerAndScaleYes(yesScale);
+    introYes.style.transform = 'scale(' + yesScale + ')';
     const noScale = Math.max(1 - noCount*0.1, 0.5);
     introNo.style.transform = 'scale(' + noScale + ')';
     roamNo();
@@ -1465,55 +1370,6 @@
     }
   }
   } catch(e){ console.error('cake init failed', e); }
-
-  // ---------- constellation ----------
-  try{
-  const starStories = [
-    {title:'ดาวแห่งเสียงหัวเราะ', story:'บนดาวดวงนี้ ทุกครั้งที่ใครสักคนหัวเราะออกมาจากใจจริง เสียงนั้นจะลอยขึ้นมาเก็บไว้ที่นี่ กลายเป็นแสงระยิบระยับที่ไม่มีวันดับ'},
-    {title:'ดาวแห่งความฝัน', story:'ดาวดวงนี้เก็บความฝันทุกอย่างที่ยังไปไม่ถึงไว้อย่างทะนุถนอม รอวันที่เจ้าของฝันจะกล้าเดินตามมันอีกครั้ง'},
-    {title:'ดาวแห่งการพักผ่อน', story:'ที่นี่ไม่มีอะไรต้องรีบร้อน มีแค่เก้าอี้นุ่มๆ ตัวหนึ่ง กับท้องฟ้าให้นอนมอง มันสอนว่าบางวันแค่ได้หยุดพัก ก็เพียงพอแล้ว'},
-    {title:'ดาวแห่งวันเกิด', story:'ดวงที่สว่างที่สุดในกลุ่มนี้ เป็นตัวแทนของวันพิเศษวันนี้ ที่ตั้งใจทำให้เป็นปีที่ดีที่สุดของใครบางคน'},
-    {title:'ดาวแห่งมิตรภาพ', story:'ไม่ว่าจะอยู่ไกลกันแค่ไหน เส้นแสงจากดาวดวงนี้จะเชื่อมสองคนไว้ด้วยกันเสมอ เหมือนที่เจ้าชายน้อยเชื่อมใจกับดอกกุหลาบของเขา'},
-    {title:'ดาวแห่งบ้าน', story:'ไม่ว่าจะเดินทางไปไกลแค่ไหน ดาวดวงนี้จะพาความรู้สึกอบอุ่นเหมือนได้กลับบ้านติดตามไปด้วยเสมอ'}
-  ];
-  let constellationPlayed = false;
-  function initConstellation(){
-    buildStars('starsConstellation');
-    if(constellationPlayed) return;
-    constellationPlayed = true;
-    const starEls = [...document.querySelectorAll('.const-star')];
-    starEls.forEach((el, i)=>{
-      setTimeout(()=>{ el.classList.add('active'); }, 300 + i*350);
-    });
-    setTimeout(()=>{
-      const lines = document.getElementById('constellationLines');
-      if(lines) lines.classList.add('show');
-    }, 300 + starEls.length*350 + 300);
-    starEls.forEach(el=>{
-      el.addEventListener('click', ()=>{
-        const idx = parseInt(el.dataset.idx, 10);
-        const data = starStories[idx];
-        if(!data) return;
-        document.getElementById('starDetailTitle').textContent = data.title;
-        document.getElementById('starDetailStory').textContent = data.story;
-        document.getElementById('starDetailOverlay').classList.add('show');
-      });
-    });
-  }
-  document.getElementById('closeStarDetail').addEventListener('click', ()=>{
-    document.getElementById('starDetailOverlay').classList.remove('show');
-  });
-  document.getElementById('toConstellation').addEventListener('click', ()=>{
-    goTo('scene-constellation');
-    initConstellation();
-  });
-  document.getElementById('skipConstellation').addEventListener('click', ()=>{
-    document.querySelectorAll('.const-star').forEach(el=> el.classList.add('active'));
-    const lines = document.getElementById('constellationLines');
-    if(lines) lines.classList.add('show');
-    constellationPlayed = true;
-  });
-  } catch(e){ console.error('constellation init failed', e); }
 
   goTo('scene-cover');
 })();
