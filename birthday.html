@@ -697,7 +697,7 @@
     <div class="sky-bg"></div>
     <div class="code-title">รหัสลับ</div>
     <div class="code-sub cute">ใส่รหัสตัวเลข 6 หลัก เพื่อเปิดจดหมาย</div>
-    <div class="hint-box cute show">คำใบ้: Someone is turning 29</div>
+    <div class="hint-box cute show">Hint : Someone is turning 29</div>
     <div class="code-msg" id="codeMsg"></div>
     <div class="code-inputs" id="codeInputs">
       <div class="code-box" data-i="0"></div>
@@ -1009,6 +1009,45 @@
       s.style.animationDelay = (Math.random()*3)+'s';
       el.appendChild(s);
     }
+  }
+  function buildConstellationBg(id){
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.innerHTML='';
+    // dense twinkle field across the whole scene, varied sizes for a cuter, richer sky
+    for(let i=0;i<90;i++){
+      const s = document.createElement('div');
+      s.className='star';
+      const size = [1,1,1,2,2,3][Math.floor(Math.random()*6)];
+      s.style.width = size+'px';
+      s.style.height = size+'px';
+      s.style.left = Math.random()*100+'%';
+      s.style.top = Math.random()*100+'%';
+      s.style.animationDelay = (Math.random()*3)+'s';
+      s.style.opacity = (0.4 + Math.random()*0.6).toFixed(2);
+      el.appendChild(s);
+    }
+    // a handful of little star/sparkle doodles scattered for extra charm
+    const miniStarSvg = '<svg viewBox="0 0 40 40"><path d="M20 4 L23 16 L36 16 L25 24 L29 36 L20 28 L11 36 L15 24 L4 16 L17 16Z" fill="#ffd166" stroke="#3d2415" stroke-width="1.6" stroke-linejoin="round"/></svg>';
+    const miniSparkleSvg = '<svg viewBox="0 0 40 40"><path d="M4 4 L36 36 M36 4 L4 36 M20 0 L20 40 M0 20 L40 20" stroke="#ff9fbb" stroke-width="2.6" stroke-linecap="round"/></svg>';
+    const spots = [
+      {l:'8%', t:'6%', s:16, svg:miniStarSvg, r:-10},
+      {l:'88%', t:'9%', s:12, svg:miniSparkleSvg, r:0},
+      {l:'14%', t:'46%', s:11, svg:miniSparkleSvg, r:0},
+      {l:'90%', t:'52%', s:14, svg:miniStarSvg, r:14},
+      {l:'6%', t:'82%', s:13, svg:miniStarSvg, r:8},
+      {l:'86%', t:'86%', s:11, svg:miniSparkleSvg, r:0}
+    ];
+    spots.forEach(sp=>{
+      const d = document.createElement('div');
+      d.style.position='absolute';
+      d.style.left=sp.l; d.style.top=sp.t;
+      d.style.width=sp.s+'px'; d.style.height=sp.s+'px';
+      d.style.opacity='0.85';
+      d.style.transform='rotate('+sp.r+'deg)';
+      d.innerHTML = sp.svg;
+      el.appendChild(d);
+    });
   }
   buildStars('stars1'); buildStars('stars2');
 
@@ -1516,7 +1555,7 @@
   ];
   let constellationPlayed = false;
   function initConstellation(){
-    buildStars('starsConstellation');
+    buildConstellationBg('starsConstellation');
     if(constellationPlayed) return;
     constellationPlayed = true;
     const starEls = [...document.querySelectorAll('.const-star')];
